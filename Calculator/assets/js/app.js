@@ -11,6 +11,9 @@ calc.addEventListener('click', (e) => {
     if (!value) return;
     if (type === "ops" && value === "5") {
         output.value = Function(`return ${output.value}`)();
+    } else if (type === "clr") {
+        output.value = '';
+        e.preventDefault();
     } else {
         output.value = output.value + ((type === "num") ? value : options[parseInt(value)]);
     }
