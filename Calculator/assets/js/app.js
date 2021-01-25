@@ -1,4 +1,4 @@
-let options = ["", " + ", " - ", " * ", " / ", " = ", " ** "];
+let options = ["", " + ", " - ", " * ", " / ", " = ", " ** ", " % ", " ^ ", "<<"];
 // define UI variables
 
 let calc = document.querySelector("#Calculator");
