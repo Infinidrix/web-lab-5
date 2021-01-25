@@ -1,3 +1,6 @@
+// Define state variables
+let isAscending = true;
+
 // Define UI Variables 
 const taskInput = document.querySelector('#task'); //the task input text field
 const form = document.querySelector('#task-form'); //The form at the top
@@ -6,6 +9,8 @@ const taskList = document.querySelector('.collection'); //The UL
 const clearBtn = document.querySelector('.clear-tasks'); //the all task clear button
 
 const reloadIcon = document.querySelector('.fa'); //the reload button at the top navigation 
+const desendingBtn = document.querySelector("#descending-btn");
+const ascendingBtn = document.querySelector("#ascending-btn")
 
 // Add Event Listener  [Form , clearBtn and filter search input ]
 
@@ -19,10 +24,26 @@ filter.addEventListener('keyup', filterTasks);
 taskList.addEventListener('click', removeTask);
 // Event Listener for reload 
 reloadIcon.addEventListener('click', reloadPage);
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems, { "constrainWidth": false });
+});
+
+desendingBtn.addEventListener('click', (e) => sort(true));
+ascendingBtn.addEventListener('click', (e) => sort(false));
 
 
+function sort(isDecending) {
+    if ((isAscending ^ isDecending)) return
 
-
+    let tasks = taskList.children.length;
+    for (let i = 1; i < tasks; i++) {
+        let task = taskList.children[i];
+        taskList.removeChild(task);
+        taskList.prepend(task);
+    }
+    isAscending = !isAscending;
+}
 
 // Add New  Task Function definition 
 function addNewTask(e) {
@@ -51,11 +72,7 @@ function addNewTask(e) {
     // Append link to li
     li.appendChild(link);
     // Append to UL 
-    taskList.appendChild(li);
-
-
-
-
+    (isAscending) ? taskList.appendChild(li): taskList.prepend(li);
 }
 
 
@@ -82,7 +99,7 @@ function filterTasks(e) {
 
     /*  
     Instruction for Handling the Search/filter 
-    
+
     1. Receive the user input from the text input 
     2. Assign it to a variable so the us can reuse it 
     3. Use the querySelectorAll() in order to get the collection of li which have  .collection-item class 
