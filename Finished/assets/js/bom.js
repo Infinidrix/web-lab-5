@@ -14,7 +14,7 @@ Adding Extra is Possible if you want to explore more ...
 Good Luck !!! 
 */
 
-
+// Answers to the questions in order of appearance
 const LOCATION = [location.href, location.protocol, location.host,
     location.port, location.hostname
 ];
@@ -29,6 +29,7 @@ const order = { LOCATION, BROWSER, SCREEN, BROWSING };
 // Define UI Variables  here 
 const quizRoot = document.querySelectorAll(".collection");
 quizRoot.forEach(section => {
+    // gets the title's first word
     let part = section.previousSibling.previousSibling.textContent.split(" ")[0].toUpperCase();
     placeAnswers(section, order[part]);
 });
