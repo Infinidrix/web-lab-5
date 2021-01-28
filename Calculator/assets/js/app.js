@@ -10,7 +10,7 @@ calc.addEventListener('click', (e) => {
     let [type, value] = src.split("-");
     if (!value) return;
     if (type === "ops" && value === "5") {
-        output.value = Function(`return ${output.value}`)();
+        output.value = calculateExpr(output.value);
     } else if (type === "clr") {
         output.value = '';
         e.preventDefault();
@@ -18,3 +18,11 @@ calc.addEventListener('click', (e) => {
         output.value = output.value + ((type === "num") ? value : options[parseInt(value)]);
     }
 })
+
+function calculateExpr(value){
+    try{
+        return Function(`return ${value}`)();
+    } catch (e) {
+        return "";
+    }
+}
